@@ -9,8 +9,11 @@ downloads.
 ## Installation
 
 ``` r
+# pkg_install ("pak")
+pak::pkg_install("NickGlaettli/HSGconnect")
+
 # install.packages("devtools")
-devtools::install_github("your-username/HSGconnect")
+devtools::install_github("NickGlaettli/HSGconnect")
 ```
 
 ## Quick Start
@@ -21,7 +24,7 @@ library(HSGconnect)
 # One-time setup: stores credentials in .Renviron
 sd_setup()
 
-# Connect to SwitchDrive
+# Connect to SwitchDrive (can be skipped)
 sd_connect()
 #> Successfully connected to Switchdrive as max.mustermann@unisg.ch
 
@@ -41,8 +44,8 @@ df <- read_sd("Projekte/report.xlsx", sheet = "Rohdaten")
 
 ## Prerequisites
 
-You need an **app-specific password** for SwitchDrive (not your
-university login):
+An **app-specific password** for SwitchDrive (not your
+university login) is strongly advised:
 
 1.  Log in to [drive.switch.ch](https://drive.switch.ch)
 2.  Go to **Settings → Security**
