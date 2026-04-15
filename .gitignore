@@ -1,6 +1,7 @@
 .Rproj.user
 .Rhistory
 .RData
+.HSGconnect.Rproj
 .httr-oauth
 .DS_Store
 .quarto
