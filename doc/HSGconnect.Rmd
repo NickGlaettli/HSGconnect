@@ -1,0 +1,198 @@
+---
+title: "Getting Started with HSGconnect"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Getting Started with HSGconnect}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  eval = FALSE
+)
+```
+
+## Overview
+
+`HSGconnect` provides a convenient interface to access files stored on
+[SwitchDrive](https://drive.switch.ch) directly from R. It connects via WebDAV,
+so you can browse folders, read data files, and import BFS survey data — all
+without manually downloading anything.
+
+The typical workflow looks like this:
+
+1. **One-time setup** — store your credentials securely.
+2. **Connect** — authenticate against SwitchDrive.
+3. **Browse** — list available files and folders.
+4. **Read** — import data directly into R as a data frame.
+
+## Prerequisites
+
+Before you start, you should have an **app-specific password** for SwitchDrive.
+It is not advised to use your regular university login. To create one:
+
+1. Log in to [drive.switch.ch](https://drive.switch.ch).
+2. Go to **Settings → Security**.
+3. Under *App passwords*, create a new password and copy it.
+
+You will also need the following R packages installed (they are listed as
+dependencies and will be installed automatically):
+
+- `httr`, `xml2` — for WebDAV communication
+- `haven` — for reading `.sav` files (SPSS)
+- `readr` — for reading `.csv` files
+- `readxl` — for reading `.xlsx` files
+
+## Step 1: Store Your Credentials
+
+Run `sd_setup()` once to save your SwitchDrive username and app password to
+your `.Renviron` file. This ensures they are available in every future R session
+without hardcoding them in your scripts (security risk!!).
+
+```{r}
+library(HSGconnect)
+
+sd_setup()
+#> Enter your Switchdrive username (email): max.mustermann@unisg.ch
+#> Enter your app password: ****
+#> Credentials saved to .Renviron.
+```
+
+After setup, R will restart so the new environment variables take effect.
+You only need to do this once.
+
+## Step 2: Connect to SwitchDrive
+
+At the beginning of each session, you can load the package and connect:
+
+```{r}
+library(HSGconnect)
+
+sd_connect()
+#> Successfully connected to Switchdrive as nick.glaettli@unisg.ch
+```
+
+`sd_connect()` reads your credentials from the environment variables set by
+`sd_setup()` and validates the connection with a WebDAV request. The connection
+is cached internally, so you only need to call it once per session.
+
+**Note:** If you forget to call `sd_connect()`, don't worry — any function that
+needs a connection will call it automatically. So you can also skip this step 
+in each session without any problems.
+
+## Step 3: Browse Files
+
+Use `sd_list_files()` to see what's available on your SwitchDrive:
+
+```{r}
+# List the root directory ("Alle Dateien")
+sd_list_files()
+#> [1] "BFS Daten/"  "Projekte/"  "readme.txt"
+
+# List a specific folder
+sd_list_files("BFS Daten")
+#> [1] "01 EHA Absolventen/"    "02 SSEE Studenten/"
+#> [3] "03 Verträge/"           "04 Importinformationen/"
+
+# Go deeper
+sd_list_files("BFS Daten/01 EHA Absolventen/01 Arbeitsdaten")
+#> [1] "eb_2023_hsg.sav"  "eb_2023_all.sav"  "zb_2023_hsg.sav"
+```
+
+Folders are indicated by a trailing `/`. Paths with spaces are handled
+automatically.
+
+**Note:** This functions serves for your convenience when wanting to import 
+data from SwitchDrive. If you are only interested in importing BFS data,
+you can rely on the `read_BFS_data()` function, as it automatically accesses
+the appropriate folders. So there is no need to manually navegate SwitchDrive.
+
+## Step 4: Read Data
+
+### BFS Survey Data
+
+For BFS survey data, use `read_BFS_data()`. It knows the folder structure and
+file naming conventions, so you only need to specify the survey parameters:
+
+```{r}
+# EHA Erstbefragung 2023, HSG only (default)
+eha <- read_BFS_data()
+#> Reading eb_2023_hsg.sav...
+#> Import successful: 1245 rows, 187 columns.
+
+# EHA Zweitbefragung 2023, all universities
+eha_all <- read_BFS_data(first_wave = FALSE, HSG_only = FALSE)
+#> Reading zb_2023_all.sav...
+#> Import successful: 38210 rows, 192 columns.
+
+# SSEE 2024, HSG only
+ssee <- read_BFS_data(survey = "SSEE", year = 2024)
+#> Reading ssee_2024_hsg.sav...
+#> Import successful: 2310 rows, 95 columns.
+
+# EHA by cohort year (adds 1 to get the survey year)
+eha_cohort <- read_BFS_data(year = 2022, cohort = TRUE)
+#> Reading eb_2023_hsg.sav...
+#> Import successful: 1245 rows, 187 columns.
+```
+
+**Parameters at a glance:**
+
+| Parameter    | Default  | Description                                         |
+|:-------------|:---------|:----------------------------------------------------|
+| `survey`     | `"EHA"`  | Survey type: `"EHA"` or `"SSEE"`                    |
+| `first_wave` | `TRUE`   | EHA only: `TRUE` for Erstbefragung, `FALSE` for Zweitbefragung |
+| `year`       | `2023`   | Survey year (or cohort year if `cohort = TRUE`)      |
+| `cohort`     | `FALSE`  | If `TRUE`, `year` is interpreted as cohort year      |
+| `HSG_only`   | `TRUE`   | `TRUE` for HSG respondents only, `FALSE` for all     |
+
+### Any File on SwitchDrive
+
+For files outside the BFS structure, use `read_sd()`. It supports `.sav`,
+`.csv`, and `.xlsx` files:
+
+```{r}
+# Read an SPSS file
+df <- read_sd("Projekte/survey_results.sav")
+
+# Read a CSV (comma-separated)
+df <- read_sd("Daten/export.csv")
+
+# Read a CSV with semicolon delimiter (common in Swiss/German data)
+df <- read_sd("Daten/export.csv", delim = "semicol")
+
+# Read an Excel file, specific sheet
+df <- read_sd("Projekte/report.xlsx", sheet = "Rohdaten")
+```
+
+Additional arguments (`...`) are passed to the underlying import functions
+(`haven::read_sav()`, `readr::read_csv()`, `readr::read_csv2()`,
+`readxl::read_excel()`), so you can use parameters like `skip`, `col_types`,
+or `na` as usual.
+
+## Quick Reference
+
+```{r}
+# Full workflow in 4 lines
+library(HSGconnect)
+sd_connect()
+sd_list_files("BFS Daten/01 EHA Absolventen/01 Arbeitsdaten")
+eha <- read_BFS_data(survey = "EHA", year = 2023, HSG_only = TRUE)
+```
+
+## Troubleshooting
+
+**Connection fails with status 401:**
+Your credentials are likely incorrect. Check that you are using an app-specific
+password (not your university login). Run `sd_setup()` again to update them.
+
+**File not found (status 404):**
+Use `sd_list_files()` to verify the exact path and filename. Watch out for
+spaces and special characters in folder names.
+
+**"No username provided" error:**
+Your `.Renviron` file is not loaded. Make sure you restarted R after running
+`sd_setup()`. You can verify with `Sys.getenv("SWITCH_USER")`.

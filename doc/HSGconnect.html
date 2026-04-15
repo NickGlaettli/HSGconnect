@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+
+
+<title>Getting Started with HSGconnect</title>
+
+<script>// Pandoc 2.9 adds attributes on both header and div. We remove the former (to
+// be compatible with the behavior of Pandoc < 2.8).
+document.addEventListener('DOMContentLoaded', function(e) {
+  var hs = document.querySelectorAll("div.section[class*='level'] > :first-child");
+  var i, h, a;
+  for (i = 0; i < hs.length; i++) {
+    h = hs[i];
+    if (!/^h[1-6]$/i.test(h.tagName)) continue;  // it should be a header h1-h6
+    a = h.attributes;
+    while (a.length > 0) h.removeAttribute(a[0].name);
+  }
+});
+</script>
+
+<style type="text/css">
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+span.underline{text-decoration: underline;}
+div.column{display: inline-block; vertical-align: top; width: 50%;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+</style>
+
+
+
+<style type="text/css">
+code {
+white-space: pre;
+}
+.sourceCode {
+overflow: visible;
+}
+</style>
+<style type="text/css" data-origin="pandoc">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+{ counter-reset: source-line 0; }
+pre.numberSource code > span
+{ position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+{ content: counter(source-line);
+position: relative; left: -1em; text-align: right; vertical-align: baseline;
+border: none; display: inline-block;
+-webkit-touch-callout: none; -webkit-user-select: none;
+-khtml-user-select: none; -moz-user-select: none;
+-ms-user-select: none; user-select: none;
+padding: 0 4px; width: 4em;
+color: #aaaaaa;
+}
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa; padding-left: 4px; }
+div.sourceCode
+{ }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } 
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.at { color: #7d9029; } 
+code span.bn { color: #40a070; } 
+code span.bu { color: #008000; } 
+code span.cf { color: #007020; font-weight: bold; } 
+code span.ch { color: #4070a0; } 
+code span.cn { color: #880000; } 
+code span.co { color: #60a0b0; font-style: italic; } 
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.do { color: #ba2121; font-style: italic; } 
+code span.dt { color: #902000; } 
+code span.dv { color: #40a070; } 
+code span.er { color: #ff0000; font-weight: bold; } 
+code span.ex { } 
+code span.fl { color: #40a070; } 
+code span.fu { color: #06287e; } 
+code span.im { color: #008000; font-weight: bold; } 
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.kw { color: #007020; font-weight: bold; } 
+code span.op { color: #666666; } 
+code span.ot { color: #007020; } 
+code span.pp { color: #bc7a00; } 
+code span.sc { color: #4070a0; } 
+code span.ss { color: #bb6688; } 
+code span.st { color: #4070a0; } 
+code span.va { color: #19177c; } 
+code span.vs { color: #4070a0; } 
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } 
+</style>
+<script>
+// apply pandoc div.sourceCode style to pre.sourceCode instead
+(function() {
+  var sheets = document.styleSheets;
+  for (var i = 0; i < sheets.length; i++) {
+    if (sheets[i].ownerNode.dataset["origin"] !== "pandoc") continue;
+    try { var rules = sheets[i].cssRules; } catch (e) { continue; }
+    var j = 0;
+    while (j < rules.length) {
+      var rule = rules[j];
+      // check if there is a div.sourceCode rule
+      if (rule.type !== rule.STYLE_RULE || rule.selectorText !== "div.sourceCode") {
+        j++;
+        continue;
+      }
+      var style = rule.style.cssText;
+      // check if color or background-color is set
+      if (rule.style.color === '' && rule.style.backgroundColor === '') {
+        j++;
+        continue;
+      }
+      // replace div.sourceCode by a pre.sourceCode rule
+      sheets[i].deleteRule(j);
+      sheets[i].insertRule('pre.sourceCode{' + style + '}', j);
+    }
+  }
+})();
+</script>
+
+
+
+
+<style type="text/css">body {
+background-color: #fff;
+margin: 1em auto;
+max-width: 700px;
+overflow: visible;
+padding-left: 2em;
+padding-right: 2em;
+font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+font-size: 14px;
+line-height: 1.35;
+}
+#TOC {
+clear: both;
+margin: 0 0 10px 10px;
+padding: 4px;
+width: 400px;
+border: 1px solid #CCCCCC;
+border-radius: 5px;
+background-color: #f6f6f6;
+font-size: 13px;
+line-height: 1.3;
+}
+#TOC .toctitle {
+font-weight: bold;
+font-size: 15px;
+margin-left: 5px;
+}
+#TOC ul {
+padding-left: 40px;
+margin-left: -1.5em;
+margin-top: 5px;
+margin-bottom: 5px;
+}
+#TOC ul ul {
+margin-left: -2em;
+}
+#TOC li {
+line-height: 16px;
+}
+table {
+margin: 1em auto;
+border-width: 1px;
+border-color: #DDDDDD;
+border-style: outset;
+border-collapse: collapse;
+}
+table th {
+border-width: 2px;
+padding: 5px;
+border-style: inset;
+}
+table td {
+border-width: 1px;
+border-style: inset;
+line-height: 18px;
+padding: 5px 5px;
+}
+table, table th, table td {
+border-left-style: none;
+border-right-style: none;
+}
+table thead, table tr.even {
+background-color: #f7f7f7;
+}
+p {
+margin: 0.5em 0;
+}
+blockquote {
+background-color: #f6f6f6;
+padding: 0.25em 0.75em;
+}
+hr {
+border-style: solid;
+border: none;
+border-top: 1px solid #777;
+margin: 28px 0;
+}
+dl {
+margin-left: 0;
+}
+dl dd {
+margin-bottom: 13px;
+margin-left: 13px;
+}
+dl dt {
+font-weight: bold;
+}
+ul {
+margin-top: 0;
+}
+ul li {
+list-style: circle outside;
+}
+ul ul {
+margin-bottom: 0;
+}
+pre, code {
+background-color: #f7f7f7;
+border-radius: 3px;
+color: #333;
+white-space: pre-wrap; 
+}
+pre {
+border-radius: 3px;
+margin: 5px 0px 10px 0px;
+padding: 10px;
+}
+pre:not([class]) {
+background-color: #f7f7f7;
+}
+code {
+font-family: Consolas, Monaco, 'Courier New', monospace;
+font-size: 85%;
+}
+p > code, li > code {
+padding: 2px 0px;
+}
+div.figure {
+text-align: center;
+}
+img {
+background-color: #FFFFFF;
+padding: 2px;
+border: 1px solid #DDDDDD;
+border-radius: 3px;
+border: 1px solid #CCCCCC;
+margin: 0 5px;
+}
+h1 {
+margin-top: 0;
+font-size: 35px;
+line-height: 40px;
+}
+h2 {
+border-bottom: 4px solid #f7f7f7;
+padding-top: 10px;
+padding-bottom: 2px;
+font-size: 145%;
+}
+h3 {
+border-bottom: 2px solid #f7f7f7;
+padding-top: 10px;
+font-size: 120%;
+}
+h4 {
+border-bottom: 1px solid #f7f7f7;
+margin-left: 8px;
+font-size: 105%;
+}
+h5, h6 {
+border-bottom: 1px solid #ccc;
+font-size: 105%;
+}
+a {
+color: #0033dd;
+text-decoration: none;
+}
+a:hover {
+color: #6666ff; }
+a:visited {
+color: #800080; }
+a:visited:hover {
+color: #BB00BB; }
+a[href^="http:"] {
+text-decoration: underline; }
+a[href^="https:"] {
+text-decoration: underline; }
+
+code > span.kw { color: #555; font-weight: bold; } 
+code > span.dt { color: #902000; } 
+code > span.dv { color: #40a070; } 
+code > span.bn { color: #d14; } 
+code > span.fl { color: #d14; } 
+code > span.ch { color: #d14; } 
+code > span.st { color: #d14; } 
+code > span.co { color: #888888; font-style: italic; } 
+code > span.ot { color: #007020; } 
+code > span.al { color: #ff0000; font-weight: bold; } 
+code > span.fu { color: #900; font-weight: bold; } 
+code > span.er { color: #a61717; background-color: #e3d2d2; } 
+</style>
+
+
+
+
+</head>
+
+<body>
+
+
+
+
+<h1 class="title toc-ignore">Getting Started with HSGconnect</h1>
+
+
+
+<div id="overview" class="section level2">
+<h2>Overview</h2>
+<p><code>HSGconnect</code> provides a convenient interface to access
+files stored on <a href="https://drive.switch.ch">SwitchDrive</a>
+directly from R. It connects via WebDAV, so you can browse folders, read
+data files, and import BFS survey data — all without manually
+downloading anything.</p>
+<p>The typical workflow looks like this:</p>
+<ol style="list-style-type: decimal">
+<li><strong>One-time setup</strong> — store your credentials
+securely.</li>
+<li><strong>Connect</strong> — authenticate against SwitchDrive.</li>
+<li><strong>Browse</strong> — list available files and folders.</li>
+<li><strong>Read</strong> — import data directly into R as a data
+frame.</li>
+</ol>
+</div>
+<div id="prerequisites" class="section level2">
+<h2>Prerequisites</h2>
+<p>Before you start, you should have an <strong>app-specific
+password</strong> for SwitchDrive. It is not advised to use your regular
+university login. To create one:</p>
+<ol style="list-style-type: decimal">
+<li>Log in to <a href="https://drive.switch.ch">drive.switch.ch</a>.</li>
+<li>Go to <strong>Settings → Security</strong>.</li>
+<li>Under <em>App passwords</em>, create a new password and copy
+it.</li>
+</ol>
+<p>You will also need the following R packages installed (they are
+listed as dependencies and will be installed automatically):</p>
+<ul>
+<li><code>httr</code>, <code>xml2</code> — for WebDAV communication</li>
+<li><code>haven</code> — for reading <code>.sav</code> files (SPSS)</li>
+<li><code>readr</code> — for reading <code>.csv</code> files</li>
+<li><code>readxl</code> — for reading <code>.xlsx</code> files</li>
+</ul>
+</div>
+<div id="step-1-store-your-credentials" class="section level2">
+<h2>Step 1: Store Your Credentials</h2>
+<p>Run <code>sd_setup()</code> once to save your SwitchDrive username
+and app password to your <code>.Renviron</code> file. This ensures they
+are available in every future R session without hardcoding them in your
+scripts (security risk!!).</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="fu">library</span>(HSGconnect)</span>
+<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" tabindex="-1"></a><span class="fu">sd_setup</span>()</span>
+<span id="cb1-4"><a href="#cb1-4" tabindex="-1"></a><span class="co">#&gt; Enter your Switchdrive username (email): max.mustermann@unisg.ch</span></span>
+<span id="cb1-5"><a href="#cb1-5" tabindex="-1"></a><span class="co">#&gt; Enter your app password: ****</span></span>
+<span id="cb1-6"><a href="#cb1-6" tabindex="-1"></a><span class="co">#&gt; Credentials saved to .Renviron.</span></span></code></pre></div>
+<p>After setup, R will restart so the new environment variables take
+effect. You only need to do this once.</p>
+</div>
+<div id="step-2-connect-to-switchdrive" class="section level2">
+<h2>Step 2: Connect to SwitchDrive</h2>
+<p>At the beginning of each session, you can load the package and
+connect:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a><span class="fu">library</span>(HSGconnect)</span>
+<span id="cb2-2"><a href="#cb2-2" tabindex="-1"></a></span>
+<span id="cb2-3"><a href="#cb2-3" tabindex="-1"></a><span class="fu">sd_connect</span>()</span>
+<span id="cb2-4"><a href="#cb2-4" tabindex="-1"></a><span class="co">#&gt; Successfully connected to Switchdrive as nick.glaettli@unisg.ch</span></span></code></pre></div>
+<p><code>sd_connect()</code> reads your credentials from the environment
+variables set by <code>sd_setup()</code> and validates the connection
+with a WebDAV request. The connection is cached internally, so you only
+need to call it once per session.</p>
+<p><strong>Note:</strong> If you forget to call
+<code>sd_connect()</code>, don’t worry — any function that needs a
+connection will call it automatically. So you can also skip this step in
+each session without any problems.</p>
+</div>
+<div id="step-3-browse-files" class="section level2">
+<h2>Step 3: Browse Files</h2>
+<p>Use <code>sd_list_files()</code> to see what’s available on your
+SwitchDrive:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a><span class="co"># List the root directory (&quot;Alle Dateien&quot;)</span></span>
+<span id="cb3-2"><a href="#cb3-2" tabindex="-1"></a><span class="fu">sd_list_files</span>()</span>
+<span id="cb3-3"><a href="#cb3-3" tabindex="-1"></a><span class="co">#&gt; [1] &quot;BFS Daten/&quot;  &quot;Projekte/&quot;  &quot;readme.txt&quot;</span></span>
+<span id="cb3-4"><a href="#cb3-4" tabindex="-1"></a></span>
+<span id="cb3-5"><a href="#cb3-5" tabindex="-1"></a><span class="co"># List a specific folder</span></span>
+<span id="cb3-6"><a href="#cb3-6" tabindex="-1"></a><span class="fu">sd_list_files</span>(<span class="st">&quot;BFS Daten&quot;</span>)</span>
+<span id="cb3-7"><a href="#cb3-7" tabindex="-1"></a><span class="co">#&gt; [1] &quot;01 EHA Absolventen/&quot;    &quot;02 SSEE Studenten/&quot;</span></span>
+<span id="cb3-8"><a href="#cb3-8" tabindex="-1"></a><span class="co">#&gt; [3] &quot;03 Verträge/&quot;           &quot;04 Importinformationen/&quot;</span></span>
+<span id="cb3-9"><a href="#cb3-9" tabindex="-1"></a></span>
+<span id="cb3-10"><a href="#cb3-10" tabindex="-1"></a><span class="co"># Go deeper</span></span>
+<span id="cb3-11"><a href="#cb3-11" tabindex="-1"></a><span class="fu">sd_list_files</span>(<span class="st">&quot;BFS Daten/01 EHA Absolventen/01 Arbeitsdaten&quot;</span>)</span>
+<span id="cb3-12"><a href="#cb3-12" tabindex="-1"></a><span class="co">#&gt; [1] &quot;eb_2023_hsg.sav&quot;  &quot;eb_2023_all.sav&quot;  &quot;zb_2023_hsg.sav&quot;</span></span></code></pre></div>
+<p>Folders are indicated by a trailing <code>/</code>. Paths with spaces
+are handled automatically.</p>
+<p><strong>Note:</strong> This functions serves for your convenience
+when wanting to import data from SwitchDrive. If you are only interested
+in importing BFS data, you can rely on the <code>read_BFS_data()</code>
+function, as it automatically accesses the appropriate folders. So there
+is no need to manually navegate SwitchDrive.</p>
+</div>
+<div id="step-4-read-data" class="section level2">
+<h2>Step 4: Read Data</h2>
+<div id="bfs-survey-data" class="section level3">
+<h3>BFS Survey Data</h3>
+<p>For BFS survey data, use <code>read_BFS_data()</code>. It knows the
+folder structure and file naming conventions, so you only need to
+specify the survey parameters:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" tabindex="-1"></a><span class="co"># EHA Erstbefragung 2023, HSG only (default)</span></span>
+<span id="cb4-2"><a href="#cb4-2" tabindex="-1"></a>eha <span class="ot">&lt;-</span> <span class="fu">read_BFS_data</span>()</span>
+<span id="cb4-3"><a href="#cb4-3" tabindex="-1"></a><span class="co">#&gt; Reading eb_2023_hsg.sav...</span></span>
+<span id="cb4-4"><a href="#cb4-4" tabindex="-1"></a><span class="co">#&gt; Import successful: 1245 rows, 187 columns.</span></span>
+<span id="cb4-5"><a href="#cb4-5" tabindex="-1"></a></span>
+<span id="cb4-6"><a href="#cb4-6" tabindex="-1"></a><span class="co"># EHA Zweitbefragung 2023, all universities</span></span>
+<span id="cb4-7"><a href="#cb4-7" tabindex="-1"></a>eha_all <span class="ot">&lt;-</span> <span class="fu">read_BFS_data</span>(<span class="at">first_wave =</span> <span class="cn">FALSE</span>, <span class="at">HSG_only =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb4-8"><a href="#cb4-8" tabindex="-1"></a><span class="co">#&gt; Reading zb_2023_all.sav...</span></span>
+<span id="cb4-9"><a href="#cb4-9" tabindex="-1"></a><span class="co">#&gt; Import successful: 38210 rows, 192 columns.</span></span>
+<span id="cb4-10"><a href="#cb4-10" tabindex="-1"></a></span>
+<span id="cb4-11"><a href="#cb4-11" tabindex="-1"></a><span class="co"># SSEE 2024, HSG only</span></span>
+<span id="cb4-12"><a href="#cb4-12" tabindex="-1"></a>ssee <span class="ot">&lt;-</span> <span class="fu">read_BFS_data</span>(<span class="at">survey =</span> <span class="st">&quot;SSEE&quot;</span>, <span class="at">year =</span> <span class="dv">2024</span>)</span>
+<span id="cb4-13"><a href="#cb4-13" tabindex="-1"></a><span class="co">#&gt; Reading ssee_2024_hsg.sav...</span></span>
+<span id="cb4-14"><a href="#cb4-14" tabindex="-1"></a><span class="co">#&gt; Import successful: 2310 rows, 95 columns.</span></span>
+<span id="cb4-15"><a href="#cb4-15" tabindex="-1"></a></span>
+<span id="cb4-16"><a href="#cb4-16" tabindex="-1"></a><span class="co"># EHA by cohort year (adds 1 to get the survey year)</span></span>
+<span id="cb4-17"><a href="#cb4-17" tabindex="-1"></a>eha_cohort <span class="ot">&lt;-</span> <span class="fu">read_BFS_data</span>(<span class="at">year =</span> <span class="dv">2022</span>, <span class="at">cohort =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb4-18"><a href="#cb4-18" tabindex="-1"></a><span class="co">#&gt; Reading eb_2023_hsg.sav...</span></span>
+<span id="cb4-19"><a href="#cb4-19" tabindex="-1"></a><span class="co">#&gt; Import successful: 1245 rows, 187 columns.</span></span></code></pre></div>
+<p><strong>Parameters at a glance:</strong></p>
+<table>
+<colgroup>
+<col width="18%" />
+<col width="12%" />
+<col width="68%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="left">Parameter</th>
+<th align="left">Default</th>
+<th align="left">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left"><code>survey</code></td>
+<td align="left"><code>&quot;EHA&quot;</code></td>
+<td align="left">Survey type: <code>&quot;EHA&quot;</code> or
+<code>&quot;SSEE&quot;</code></td>
+</tr>
+<tr class="even">
+<td align="left"><code>first_wave</code></td>
+<td align="left"><code>TRUE</code></td>
+<td align="left">EHA only: <code>TRUE</code> for Erstbefragung,
+<code>FALSE</code> for Zweitbefragung</td>
+</tr>
+<tr class="odd">
+<td align="left"><code>year</code></td>
+<td align="left"><code>2023</code></td>
+<td align="left">Survey year (or cohort year if
+<code>cohort = TRUE</code>)</td>
+</tr>
+<tr class="even">
+<td align="left"><code>cohort</code></td>
+<td align="left"><code>FALSE</code></td>
+<td align="left">If <code>TRUE</code>, <code>year</code> is interpreted
+as cohort year</td>
+</tr>
+<tr class="odd">
+<td align="left"><code>HSG_only</code></td>
+<td align="left"><code>TRUE</code></td>
+<td align="left"><code>TRUE</code> for HSG respondents only,
+<code>FALSE</code> for all</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="any-file-on-switchdrive" class="section level3">
+<h3>Any File on SwitchDrive</h3>
+<p>For files outside the BFS structure, use <code>read_sd()</code>. It
+supports <code>.sav</code>, <code>.csv</code>, and <code>.xlsx</code>
+files:</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" tabindex="-1"></a><span class="co"># Read an SPSS file</span></span>
+<span id="cb5-2"><a href="#cb5-2" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">read_sd</span>(<span class="st">&quot;Projekte/survey_results.sav&quot;</span>)</span>
+<span id="cb5-3"><a href="#cb5-3" tabindex="-1"></a></span>
+<span id="cb5-4"><a href="#cb5-4" tabindex="-1"></a><span class="co"># Read a CSV (comma-separated)</span></span>
+<span id="cb5-5"><a href="#cb5-5" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">read_sd</span>(<span class="st">&quot;Daten/export.csv&quot;</span>)</span>
+<span id="cb5-6"><a href="#cb5-6" tabindex="-1"></a></span>
+<span id="cb5-7"><a href="#cb5-7" tabindex="-1"></a><span class="co"># Read a CSV with semicolon delimiter (common in Swiss/German data)</span></span>
+<span id="cb5-8"><a href="#cb5-8" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">read_sd</span>(<span class="st">&quot;Daten/export.csv&quot;</span>, <span class="at">delim =</span> <span class="st">&quot;semicol&quot;</span>)</span>
+<span id="cb5-9"><a href="#cb5-9" tabindex="-1"></a></span>
+<span id="cb5-10"><a href="#cb5-10" tabindex="-1"></a><span class="co"># Read an Excel file, specific sheet</span></span>
+<span id="cb5-11"><a href="#cb5-11" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">read_sd</span>(<span class="st">&quot;Projekte/report.xlsx&quot;</span>, <span class="at">sheet =</span> <span class="st">&quot;Rohdaten&quot;</span>)</span></code></pre></div>
+<p>Additional arguments (<code>...</code>) are passed to the underlying
+import functions (<code>haven::read_sav()</code>,
+<code>readr::read_csv()</code>, <code>readr::read_csv2()</code>,
+<code>readxl::read_excel()</code>), so you can use parameters like
+<code>skip</code>, <code>col_types</code>, or <code>na</code> as
+usual.</p>
+</div>
+</div>
+<div id="quick-reference" class="section level2">
+<h2>Quick Reference</h2>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" tabindex="-1"></a><span class="co"># Full workflow in 4 lines</span></span>
+<span id="cb6-2"><a href="#cb6-2" tabindex="-1"></a><span class="fu">library</span>(HSGconnect)</span>
+<span id="cb6-3"><a href="#cb6-3" tabindex="-1"></a><span class="fu">sd_connect</span>()</span>
+<span id="cb6-4"><a href="#cb6-4" tabindex="-1"></a><span class="fu">sd_list_files</span>(<span class="st">&quot;BFS Daten/01 EHA Absolventen/01 Arbeitsdaten&quot;</span>)</span>
+<span id="cb6-5"><a href="#cb6-5" tabindex="-1"></a>eha <span class="ot">&lt;-</span> <span class="fu">read_BFS_data</span>(<span class="at">survey =</span> <span class="st">&quot;EHA&quot;</span>, <span class="at">year =</span> <span class="dv">2023</span>, <span class="at">HSG_only =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+</div>
+<div id="troubleshooting" class="section level2">
+<h2>Troubleshooting</h2>
+<p><strong>Connection fails with status 401:</strong> Your credentials
+are likely incorrect. Check that you are using an app-specific password
+(not your university login). Run <code>sd_setup()</code> again to update
+them.</p>
+<p><strong>File not found (status 404):</strong> Use
+<code>sd_list_files()</code> to verify the exact path and filename.
+Watch out for spaces and special characters in folder names.</p>
+<p><strong>“No username provided” error:</strong> Your
+<code>.Renviron</code> file is not loaded. Make sure you restarted R
+after running <code>sd_setup()</code>. You can verify with
+<code>Sys.getenv(&quot;SWITCH_USER&quot;)</code>.</p>
+</div>
+
+
+
+<!-- code folding -->
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
