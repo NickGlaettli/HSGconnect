@@ -1,0 +1,27 @@
+Package: HSGconnect
+Type: Package
+Title: Load BFS data and other files from SwitchDrive
+Version: 0.1.0
+Authors@R: c(
+    person(
+      "Nick", "Glaettli",
+      email = "nick.glaettli@usnig.ch",
+      role = c("aut", "cre")
+    )
+  )
+Description: This package allows you to directly access the HSG BFS data from SwitchDrive, as well as other files stored on SwitchDrive.
+Imports:
+  httr,
+  rstudioapi,
+  utils,
+  haven,
+  readr,
+  readxl,
+  tools,
+  xml2
+Suggests: knitr, rmarkdown
+VignetteBuilder: knitr
+License: AGPL (>= 3)
+Encoding: UTF-8
+LazyData: true
+RoxygenNote: 7.3.3
