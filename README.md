@@ -9,6 +9,9 @@ downloads.
 ## Installation
 
 ``` r
+# pkg_install ("pak")
+pak::pkg_install("NickGlaettli/HSGconnect")
+
 # install.packages("devtools")
 devtools::install_github("your-username/HSGconnect")
 ```
