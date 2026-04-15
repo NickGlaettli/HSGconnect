@@ -24,7 +24,7 @@ library(HSGconnect)
 # One-time setup: stores credentials in .Renviron
 sd_setup()
 
-# Connect to SwitchDrive
+# Connect to SwitchDrive (can be skipped)
 sd_connect()
 #> Successfully connected to Switchdrive as max.mustermann@unisg.ch
 
