@@ -9,11 +9,9 @@ downloads.
 ## Installation
 
 ``` r
-# pkg_install ("pak")
-pak::pkg_install("NickGlaettli/HSGconnect")
+# install package using pak
+pak::pak("NickGlaettli/HSGconnect")
 
-# install.packages("devtools")
-devtools::install_github("NickGlaettli/HSGconnect")
 ```
 
 ## Quick Start
