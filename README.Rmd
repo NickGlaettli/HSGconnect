@@ -19,8 +19,8 @@ files, and import BFS survey data — directly from R, without manual downloads.
 ## Installation
 
 ```{r}
-# install.packages("devtools")
-devtools::install_github("NickGlaettli/HSGconnect")
+# install package using pak
+pak::pak("NickGlaettli/HSGconnect")
 ```
 
 ## Quick Start
