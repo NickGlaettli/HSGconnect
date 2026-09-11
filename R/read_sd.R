@@ -51,8 +51,9 @@ read_sd <- function(path, delim = "comma", ...) {
   )
 
   if (httr::status_code(response) != 200) {
-    stop("Download failed for '", path, "'. HTTP status: ",
-         httr::status_code(response))
+    sd_stop_http(httr::status_code(response),
+                 paste0("Download failed for '", path, "'"),
+                 url)
   }
 
   if(ext == "csv"){

@@ -40,7 +40,9 @@ sd_list_files <- function(path = "") {
   )
 
   if (httr::status_code(response) != 207) {
-    stop("Could not list '", path, "'. HTTP status: ", httr::status_code(response))
+    sd_stop_http(httr::status_code(response),
+                 paste0("Could not list '", path, "'"),
+                 url)
   }
 
   # Parse XML response

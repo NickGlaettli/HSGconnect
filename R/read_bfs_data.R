@@ -69,11 +69,9 @@ read_BFS_data <- function(
 
   #check if call successful
   if (httr::status_code(response) != 200) {
-    stop(
-      "Download failed for '", filename, "'. ",
-      "HTTP status: ", httr::status_code(response), "\n",
-      "Tried URL: ", path
-    )
+    sd_stop_http(httr::status_code(response),
+                 paste0("Download failed for '", filename, "'"),
+                 path)
   }
 
   #creat helper file

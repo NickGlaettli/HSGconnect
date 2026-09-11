@@ -40,7 +40,9 @@ sd_connect <- function(
 
   #check connection success
   if (httr::status_code(response) != 207) {
-    stop(paste("Connection failed. Status code:", httr::status_code(response)))
+    sd_stop_http(httr::status_code(response),
+                 paste0("Connection failed for user '", username, "'"),
+                 url)
   }
 
   #add connection to cache
