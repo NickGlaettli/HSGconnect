@@ -5,7 +5,9 @@
 #' Call this function when you have never connected to your SwitchDrive Account via R, to store username and password for all connections.
 #' It is advised to set a app-specific password.
 #'
-#'
+#' @returns
+#' No return value, called for its side effect of writing
+#' SWITCH_USER and SWITCH_PASSWORD to .Renviron.
 #'
 #' @export
 #'

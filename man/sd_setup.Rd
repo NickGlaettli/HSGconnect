@@ -6,6 +6,10 @@
 \usage{
 sd_setup()
 }
+\value{
+No return value, called for its side effect of writing
+SWITCH_USER and SWITCH_PASSWORD to .Renviron.
+}
 \description{
 This function allows you to set your credentials of SwitchDrive.
 Call this function when you have never connected to your SwitchDrive Account via R, to store username and password for all connections.

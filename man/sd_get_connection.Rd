@@ -6,6 +6,10 @@
 \usage{
 sd_get_connection()
 }
+\value{
+The cached connection of class \code{sd_connection} (list of username, password and url).
+If no connection is cached yet, \code{sd_connect()} is called first.
+}
 \description{
 Used as helper function in functions that retrieve SwitchDrive data.
 }
