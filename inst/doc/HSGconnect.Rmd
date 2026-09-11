@@ -118,15 +118,15 @@ For BFS survey data, use `read_BFS_data()`. It knows the folder structure and
 file naming conventions, so you only need to specify the survey parameters:
 
 ```{r}
-# EHA Erstbefragung 2023, HSG only (default)
+# EHA Erstbefragung 2025, HSG only (default)
 eha <- read_BFS_data()
-#> Reading eb_2023_hsg.sav...
-#> Import successful: 1245 rows, 187 columns.
+#> Reading eb_2025_hsg.sav...
+#> Import successful: 946 rows, 956 columns.
 
-# EHA Zweitbefragung 2023, all universities
+# EHA Zweitbefragung 2025, all universities
 eha_all <- read_BFS_data(first_wave = FALSE, HSG_only = FALSE)
-#> Reading zb_2023_all.sav...
-#> Import successful: 38210 rows, 192 columns.
+#> Reading zb_2025_all.sav...
+#> Import successful: 13922 rows, 1535 columns.
 
 # SSEE 2024, HSG only
 ssee <- read_BFS_data(survey = "SSEE", year = 2024)
@@ -145,7 +145,7 @@ eha_cohort <- read_BFS_data(year = 2022, cohort = TRUE)
 |:-------------|:---------|:----------------------------------------------------|
 | `survey`     | `"EHA"`  | Survey type: `"EHA"` or `"SSEE"`                    |
 | `first_wave` | `TRUE`   | EHA only: `TRUE` for Erstbefragung, `FALSE` for Zweitbefragung |
-| `year`       | `2023`   | Survey year (or cohort year if `cohort = TRUE`)      |
+| `year`       | `2025`   | Survey year (or cohort year if `cohort = TRUE`)      |
 | `cohort`     | `FALSE`  | If `TRUE`, `year` is interpreted as cohort year      |
 | `HSG_only`   | `TRUE`   | `TRUE` for HSG respondents only, `FALSE` for all     |
 

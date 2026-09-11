@@ -48,8 +48,9 @@ overflow: visible;
 }
 </style>
 <style type="text/css" data-origin="pandoc">
+html { -webkit-text-size-adjust: 100%; }
 pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -60,7 +61,7 @@ div.sourceCode { overflow: auto; }
 }
 @media print {
 pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
 { counter-reset: source-line 0; }
@@ -440,15 +441,15 @@ is no need to manually navegate SwitchDrive.</p>
 <p>For BFS survey data, use <code>read_BFS_data()</code>. It knows the
 folder structure and file naming conventions, so you only need to
 specify the survey parameters:</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" tabindex="-1"></a><span class="co"># EHA Erstbefragung 2023, HSG only (default)</span></span>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" tabindex="-1"></a><span class="co"># EHA Erstbefragung 2025, HSG only (default)</span></span>
 <span id="cb4-2"><a href="#cb4-2" tabindex="-1"></a>eha <span class="ot">&lt;-</span> <span class="fu">read_BFS_data</span>()</span>
-<span id="cb4-3"><a href="#cb4-3" tabindex="-1"></a><span class="co">#&gt; Reading eb_2023_hsg.sav...</span></span>
-<span id="cb4-4"><a href="#cb4-4" tabindex="-1"></a><span class="co">#&gt; Import successful: 1245 rows, 187 columns.</span></span>
+<span id="cb4-3"><a href="#cb4-3" tabindex="-1"></a><span class="co">#&gt; Reading eb_2025_hsg.sav...</span></span>
+<span id="cb4-4"><a href="#cb4-4" tabindex="-1"></a><span class="co">#&gt; Import successful: 946 rows, 956 columns.</span></span>
 <span id="cb4-5"><a href="#cb4-5" tabindex="-1"></a></span>
-<span id="cb4-6"><a href="#cb4-6" tabindex="-1"></a><span class="co"># EHA Zweitbefragung 2023, all universities</span></span>
+<span id="cb4-6"><a href="#cb4-6" tabindex="-1"></a><span class="co"># EHA Zweitbefragung 2025, all universities</span></span>
 <span id="cb4-7"><a href="#cb4-7" tabindex="-1"></a>eha_all <span class="ot">&lt;-</span> <span class="fu">read_BFS_data</span>(<span class="at">first_wave =</span> <span class="cn">FALSE</span>, <span class="at">HSG_only =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb4-8"><a href="#cb4-8" tabindex="-1"></a><span class="co">#&gt; Reading zb_2023_all.sav...</span></span>
-<span id="cb4-9"><a href="#cb4-9" tabindex="-1"></a><span class="co">#&gt; Import successful: 38210 rows, 192 columns.</span></span>
+<span id="cb4-8"><a href="#cb4-8" tabindex="-1"></a><span class="co">#&gt; Reading zb_2025_all.sav...</span></span>
+<span id="cb4-9"><a href="#cb4-9" tabindex="-1"></a><span class="co">#&gt; Import successful: 13922 rows, 1535 columns.</span></span>
 <span id="cb4-10"><a href="#cb4-10" tabindex="-1"></a></span>
 <span id="cb4-11"><a href="#cb4-11" tabindex="-1"></a><span class="co"># SSEE 2024, HSG only</span></span>
 <span id="cb4-12"><a href="#cb4-12" tabindex="-1"></a>ssee <span class="ot">&lt;-</span> <span class="fu">read_BFS_data</span>(<span class="at">survey =</span> <span class="st">&quot;SSEE&quot;</span>, <span class="at">year =</span> <span class="dv">2024</span>)</span>
@@ -488,7 +489,7 @@ specify the survey parameters:</p>
 </tr>
 <tr class="odd">
 <td align="left"><code>year</code></td>
-<td align="left"><code>2023</code></td>
+<td align="left"><code>2025</code></td>
 <td align="left">Survey year (or cohort year if
 <code>cohort = TRUE</code>)</td>
 </tr>

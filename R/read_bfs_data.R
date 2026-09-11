@@ -7,7 +7,7 @@
 #' @param survey Specify the survey type you wish to load. Can be either "EHA" or "SSEE".
 #' @param first_wave For "EHA" survey please specify the survey wave.
 #' If TRUE, "Erstbefragung" is used. If FALSE, it will search for "Zweitbefragung".
-#' @param year Specify survey year. By default, it is set to 2023.
+#' @param year Specify survey year. By default, it is set to 2025.
 #' If cohort year is used, set cohort = TRUE. Cohort option is only available for EHA.
 #' @param cohort By default FALSE. Set to TRUE if year is the cohort year.
 #' @param HSG_only By default TRUE. If TRUE, only respondents affiliated to HSG are returned.
@@ -23,7 +23,7 @@
 read_BFS_data <- function(
   survey = "EHA",
   first_wave = T,
-  year = 2023,
+  year = 2025,
   cohort = F,
   HSG_only = T){
 

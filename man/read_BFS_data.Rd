@@ -7,7 +7,7 @@
 read_BFS_data(
   survey = "EHA",
   first_wave = T,
-  year = 2023,
+  year = 2025,
   cohort = F,
   HSG_only = T
 )
@@ -18,7 +18,7 @@ read_BFS_data(
 \item{first_wave}{For "EHA" survey please specify the survey wave.
 If TRUE, "Erstbefragung" is used. If FALSE, it will search for "Zweitbefragung".}
 
-\item{year}{Specify survey year. By default, it is set to 2023.
+\item{year}{Specify survey year. By default, it is set to 2025.
 If cohort year is used, set cohort = TRUE. Cohort option is only available for EHA.}
 
 \item{cohort}{By default FALSE. Set to TRUE if year is the cohort year.}

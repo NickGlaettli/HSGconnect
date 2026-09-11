@@ -34,15 +34,15 @@ knitr::opts_chunk$set(
 # #> [1] "eb_2023_hsg.sav"  "eb_2023_all.sav"  "zb_2023_hsg.sav"
 
 ## -----------------------------------------------------------------------------
-# # EHA Erstbefragung 2023, HSG only (default)
+# # EHA Erstbefragung 2025, HSG only (default)
 # eha <- read_BFS_data()
-# #> Reading eb_2023_hsg.sav...
-# #> Import successful: 1245 rows, 187 columns.
+# #> Reading eb_2025_hsg.sav...
+# #> Import successful: 946 rows, 956 columns.
 # 
-# # EHA Zweitbefragung 2023, all universities
+# # EHA Zweitbefragung 2025, all universities
 # eha_all <- read_BFS_data(first_wave = FALSE, HSG_only = FALSE)
-# #> Reading zb_2023_all.sav...
-# #> Import successful: 38210 rows, 192 columns.
+# #> Reading zb_2025_all.sav...
+# #> Import successful: 13922 rows, 1535 columns.
 # 
 # # SSEE 2024, HSG only
 # ssee <- read_BFS_data(survey = "SSEE", year = 2024)
